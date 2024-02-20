@@ -10,7 +10,7 @@ export default function Hero() {
             </div>
             <div className='py-8'>
                 <h1 className="text-4xl font-bold">The Best<br />
-                 <span className='text-red-600'>Pizza</span><br />
+                 <span className='text-red-600 italic'>Pizza</span><br />
                   in Town</h1>
                 <p className='mt-4 text-gray-500 text-sm text-justify'>Pizza is the best food which we do!
                 Pizza is the best food which we do!

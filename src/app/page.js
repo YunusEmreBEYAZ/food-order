@@ -29,7 +29,16 @@ export default function Home() {
         </p>  
         </div>
         
-      </section>     
+      </section>  
+      <section className="text-center my-4">
+        <SectionHeaders subHeader={'Any question?'} mainHeader= {'Contact Us'} />
+        <div className="my-4">
+        <a className="text-4xl mt-4 my-4" href="+31613131313">+31 6 13 13 13 13</a>
+        </div>
+      </section>
+      <footer className="text-center my-6 border-t text-gray-700 p-4 text-sm">
+        <p>&copy; 2024 Pizza Place</p>
+      </footer>   
     
     
     </>

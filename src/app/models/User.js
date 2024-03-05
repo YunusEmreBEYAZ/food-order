@@ -1,0 +1,20 @@
+import { Schema, model } from 'mongoose';
+
+const userSchema = new Schema({
+    email: {
+        type: String, 
+        required: true, 
+        unique: true},
+    password: {
+        type: String, 
+        required: true,
+        validate: {
+            validator: function(v) {
+                return this.password.length >= 6;
+            },
+            message: props => `${props.value} is not a valid password!`
+        }
+    }
+}, {timestamps: true});
+
+export const User = model('User', userSchema);

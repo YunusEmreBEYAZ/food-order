@@ -10,11 +10,11 @@ const userSchema = new Schema({
         required: true,
         validate: {
             validator: function(v) {
-                return this.password.length >= 6;
+                return v.length >= 6;
             },
             message: props => `${props.value} is not a valid password!`
         }
     }
 }, {timestamps: true});
 
-export const User = model('User', userSchema);
+export const UserModel = model('User', userSchema);

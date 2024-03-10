@@ -1,19 +1,24 @@
 import mongoose from 'mongoose';
-import { User } from '../../models/User';
+import { UserModel } from '../../models/User';
+import dotenv from 'dotenv';
 
-export default async function POST(req,res) {
+dotenv.config();
 
-    mongoose.connect(process.env.MONGO_URL);
+export default async function POST(req, res) {
+    try {
+        await mongoose.connect(process.env.MONGO_URL, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
 
-    await User.create({email:req.body.email, password:req.body.password})
+        console.log('Connected to MongoDB');
 
-    if (req.method === 'POST') {
-        const {email, password} = req.body;
-        if (email && password) {
-            res.status(200).json({message: "User created successfully"});
-            console.log(res.message)
-        } else {
-            res.status(400).json({message: "Invalid email or password"});
-        }
+        const body = await req.body;
+        const createdUser = await UserModel.create(body);
+
+        return res.status(201).json(createdUser);
+    } catch (error) {
+        console.error('Error connecting to MongoDB:', error);
+        return res.status(500).json({ error: 'Internal Server Error' });
     }
 }

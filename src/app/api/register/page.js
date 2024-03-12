@@ -11,7 +11,7 @@ export default async function POST(req, res) {
             useUnifiedTopology: true,
         });
 
-        console.log('Connected to MongoDB');
+        console.log('Succesfully connected to MongoDB');
 
         const body = await req.body;
         const createdUser = await UserModel.create(body);

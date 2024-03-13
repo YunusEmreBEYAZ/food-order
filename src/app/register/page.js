@@ -7,6 +7,8 @@ export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    
+
     const handleFormSubmit = async (e) => {
         e.preventDefault();
 
@@ -17,6 +19,7 @@ export default function Register() {
                 headers: {
                     'Content-Type': 'application/json'
                 }
+
                 
             });
 
@@ -38,8 +41,18 @@ export default function Register() {
             <h1 className="text-center text-white text-4xl">Register Now</h1>
             <form className="block max-w-xs text-center mx-auto mt-16"
                 onSubmit={handleFormSubmit}>
-                <input type="email"  placeholder="email" value={email} onChange={e => setEmail(e.target.value)}/>
-                <input type="password"  placeholder="password" value={password} onChange={e => setPassword(e.target.value)}/>
+                <input
+    type="email"
+    placeholder="email"
+    value={email}
+    onChange={(e) => setEmail(e.target.value)}
+/>
+<input
+    type="password"
+    placeholder="password"
+    value={password}
+    onChange={(e) => setPassword(e.target.value)}
+/>
                 <button type="submit">Register</button>
                 <div className="my-4 text-white italic">
                     or login with...

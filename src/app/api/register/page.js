@@ -12,13 +12,14 @@ export default async function POST(req, res) {
         });
 
         console.log('Connected to MongoDB');
-
-        const body = await req.body;
-        const createdUser = await UserModel.create(body);
+  
+        const {email,password} = req.body;
+        console.log("hello " + req.body);
+        const createdUser = await UserModel.create({email,password});
 
         return res.status(201).json(createdUser);
     } catch (error) {
-        console.error('Error connecting to MongoDB:', error);
-        return res.status(500).json({ error: 'Internal Server Error' });
+        console.error(error, error.message);
+        return;
     }
 }

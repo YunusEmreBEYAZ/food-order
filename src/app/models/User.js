@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model,models } from 'mongoose';
 
 const userSchema = new Schema({
     email: {
@@ -8,13 +8,7 @@ const userSchema = new Schema({
     password: {
         type: String, 
         required: true,
-        validate: {
-            validator: function(v) {
-                return v.length >= 6;
-            },
-            message: props => `${props.value} is not a valid password!`
-        }
     }
 }, {timestamps: true});
 
-export const UserModel = model('User', userSchema);
+export const UserModel = models.User || model('User', userSchema);

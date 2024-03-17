@@ -9,30 +9,38 @@ export default function Register() {
 
     
 
-    const handleFormSubmit = async (e) => {
+    const handleFormSubmit =  (e) => {
         e.preventDefault();
 
-        try {
-            const response = await fetch('/api/register', {
-                method: 'POST',
-                body: JSON.stringify({email,password}),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+        fetch('/api/register', {
+                     method: 'POST',
+                     body: JSON.stringify({email,password}),
+                     headers: {
+                         'Content-Type': 'application/json'
+                     }
+                    });
+
+        // try {
+        //     const response = await fetch('/api/register', {
+        //         method: 'POST',
+        //         body: JSON.stringify({email,password}),
+        //         headers: {
+        //             'Content-Type': 'application/json'
+        //         }
 
                 
-            });
+        //     });
 
-            if(!response.ok) {
-                throw new Error(response.statusText);
-            }
+        //     if(!response.ok) {
+        //         throw new Error(response.statusText);
+        //     }
             
 
-            console.log(email, password);
-            console.log("User created successfully");
-        } catch (error) {
-            console.error('Registration failed:', error.message);
-        }
+        //     console.log(email, password);
+        //     console.log("User created successfully");
+        // } catch (error) {
+        //     console.error('Registration failed:', error.message);
+        // }
 
     }
         

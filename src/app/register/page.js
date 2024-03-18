@@ -11,7 +11,6 @@ export default function Register() {
 
     const handleFormSubmit =  (e) => {
         e.preventDefault();
-
         fetch('/api/register', {
                      method: 'POST',
                      body: JSON.stringify({email,password}),
@@ -19,6 +18,9 @@ export default function Register() {
                          'Content-Type': 'application/json'
                      }
                     });
+
+        setEmail('');
+        setPassword('');
 
     }
         

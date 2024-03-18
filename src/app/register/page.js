@@ -1,17 +1,22 @@
 "use client";
 
+import { set } from 'mongoose';
 import Image from 'next/image';
 import {useState} from "react";
 
 export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [userCreated, setUserCreated] = useState(false);
+    const [creatingUser, setCreatingUser] = useState(false);
+    const [error, setError] = useState(null);
 
     
 
-    const handleFormSubmit =  (e) => {
+    const handleFormSubmit =  async (e) => {
         e.preventDefault();
-        fetch('/api/register', {
+        setCreatingUser(true);
+        await fetch('/api/register', {
                      method: 'POST',
                      body: JSON.stringify({email,password}),
                      headers: {
@@ -19,29 +24,35 @@ export default function Register() {
                      }
                     });
 
+
+        setCreatingUser(false);
         setEmail('');
         setPassword('');
+        setUserCreated(true);
 
     }
         
     return (
         <section className=" max-w-lg rounded-lg text-center bg-gray-600 shadow-2xl shadow-black transition-all mx-auto mt-16 mb-16 px-8 py-8">
             <h1 className="text-center text-white text-4xl">Register Now</h1>
+            {userCreated && <p className="text-green-400 mt-2">User created successfully!<br /> Please Login</p>}
             <form className="block max-w-xs text-center mx-auto mt-16"
                 onSubmit={handleFormSubmit}>
                 <input
+    disabled={creatingUser}
     type="email"
     placeholder="email"
     value={email}
     onChange={(e) => setEmail(e.target.value)}
 />
 <input
+    disabled={creatingUser}
     type="password"
     placeholder="password"
     value={password}
     onChange={(e) => setPassword(e.target.value)}
 />
-                <button type="submit">Register</button>
+                <button disabled={creatingUser} type="submit">Register</button>
                 <div className="my-4 text-white italic">
                     or login with...
                 </div>

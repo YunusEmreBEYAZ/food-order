@@ -3,11 +3,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import {useState} from "react";
+import { set } from 'mongoose';
 
 export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [userCreated, setUserCreated] = useState(true);
+    const [userCreated, setUserCreated] = useState(false);
     const [creatingUser, setCreatingUser] = useState(false);
     const [error, setError] = useState(null);
 
@@ -16,19 +17,27 @@ export default function Register() {
     const handleFormSubmit =  async (e) => {
         e.preventDefault();
         setCreatingUser(true);
-        await fetch('/api/register', {
-                     method: 'POST',
-                     body: JSON.stringify({email,password}),
-                     headers: {
-                         'Content-Type': 'application/json'
-                     }
-                    });
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                body: JSON.stringify({email,password}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+               });
+
+            if (!response.ok) {
+                setError("An error occurred while creating the user");
+                setCreatingUser(false);
+                return;
+            }
+            setCreatingUser(false);
+            setEmail('');
+            setPassword('');
+            setUserCreated(true);
 
 
-        setCreatingUser(false);
-        setEmail('');
-        setPassword('');
-        setUserCreated(true);
+
+        
 
     }
         
@@ -36,6 +45,7 @@ export default function Register() {
         <section className=" max-w-lg rounded-lg text-center bg-gray-600 shadow-2xl shadow-black transition-all mx-auto mt-16 mb-16 px-8 py-8">
             <h1 className="text-center text-white text-4xl">Register Now</h1>
             {userCreated && (<div className="text-green-400 mt-2">User created successfully! <br /> <Link className='underline' href={"/login"}> Please Login </Link></div> )}
+            {error && (<div className="text-red-400 mt-2">Error: {error}</div>)}
             <form className="block max-w-xs text-center mx-auto mt-16"
                 onSubmit={handleFormSubmit}>
                 <input

@@ -1,13 +1,13 @@
 "use client";
 
-import { set } from 'mongoose';
+import Link from 'next/link';
 import Image from 'next/image';
 import {useState} from "react";
 
 export default function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [userCreated, setUserCreated] = useState(false);
+    const [userCreated, setUserCreated] = useState(true);
     const [creatingUser, setCreatingUser] = useState(false);
     const [error, setError] = useState(null);
 
@@ -35,7 +35,7 @@ export default function Register() {
     return (
         <section className=" max-w-lg rounded-lg text-center bg-gray-600 shadow-2xl shadow-black transition-all mx-auto mt-16 mb-16 px-8 py-8">
             <h1 className="text-center text-white text-4xl">Register Now</h1>
-            {userCreated && <p className="text-green-400 mt-2">User created successfully!<br /> Please Login</p>}
+            {userCreated && (<div className="text-green-400 mt-2">User created successfully! <br /> <Link className='underline' href={"/login"}> Please Login </Link></div> )}
             <form className="block max-w-xs text-center mx-auto mt-16"
                 onSubmit={handleFormSubmit}>
                 <input

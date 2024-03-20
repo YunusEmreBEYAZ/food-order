@@ -7,12 +7,23 @@ import Link from "next/link";
 export default function Login() {
 
     const [email,setEmail] = useState("");
-    const [password,setPassword] = useState("")
+    const [password,setPassword] = useState("");
+
+    const handleFormSubmit = async (e) => {
+        e.preventDefault();
+        const response = await fetch("/api/login", {
+            method: "POST",
+            body: JSON.stringify({email,password}),
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+    }
 
     return (
         <section className=" max-w-lg rounded-lg text-center bg-gray-600 shadow-2xl shadow-black transition-all mx-auto mt-16 mb-16 px-8 py-8">
         <h1 className="text-center text-white text-4xl">Login</h1>
-        <form className="block max-w-xs text-center mx-auto mt-16">
+        <form className="block max-w-xs text-center mx-auto mt-16" onSubmit={handleFormSubmit}>
             <input
                 
                 type="email"

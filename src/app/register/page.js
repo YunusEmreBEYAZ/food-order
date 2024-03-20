@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import {useState} from "react";
-import { set } from 'mongoose';
+
 
 export default function Register() {
     const [email, setEmail] = useState('');
@@ -17,6 +17,8 @@ export default function Register() {
     const handleFormSubmit =  async (e) => {
         e.preventDefault();
         setCreatingUser(true);
+        setError(false);
+
             const response = await fetch('/api/register', {
                 method: 'POST',
                 body: JSON.stringify({email,password}),
@@ -69,6 +71,10 @@ export default function Register() {
                 <button className="bg-gray-100 hover:bg-blue-300 text-gray-900 flex gap-4 justify-center">
                     <Image src="/google.png" alt="Google Logo" width={20} height={20} />
                     Login with Google</button>
+
+                <div className='text-center text-white mt-6 italic'>
+                    Already have an account? <Link href={"/login"} className='underline'> Login here</Link>
+                </div>
             </form>
         </section>
     )

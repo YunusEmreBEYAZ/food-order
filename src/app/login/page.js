@@ -11,13 +11,7 @@ export default function Login() {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch("/api/login", {
-            method: "POST",
-            body: JSON.stringify({email,password}),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
+      await signIn('credentials',{email,password})
     }
 
     return (
@@ -27,6 +21,7 @@ export default function Login() {
             <input
                 
                 type="email"
+                name="email"
                 placeholder="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
@@ -34,6 +29,7 @@ export default function Login() {
             <input
                 
                 type="password"
+                name="password"
                 placeholder="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}

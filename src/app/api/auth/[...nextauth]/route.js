@@ -1,5 +1,8 @@
 import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials"
+import CredentialsProvider from "next-auth/providers/credentials";
+import mongoose from "mongoose";
+import {User} from "../../../models/User";
+import bcrypt from "bcrypt";
 
 const handler = NextAuth({
     secret: process.env.SECRET,
@@ -18,9 +21,21 @@ const handler = NextAuth({
           },
           async authorize(credentials, req) {
             
-           console.log({credentials})
+           const email = credentials?.email;
+          const password = credentials?.password;
 
-           return null;
+           mongoose.connect(process.env.MONGO_URL);
+
+           const user = await User.findOne({email:email});
+
+           if(user && bcrypt.compareSync(password,user.password)){
+              return user;
+           }
+           else{
+             throw new Error("Invalid user");
+           }
+
+         
       
            
           }

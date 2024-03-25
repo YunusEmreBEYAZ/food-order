@@ -39,7 +39,7 @@ export default function Login() {
             />
             <button  type="submit">Login</button>
             <div className="my-4 text-white italic">
-                    or login with...
+                    or login with..
             </div>
             <button onClick={() => signIn('google')} className="bg-gray-100 hover:bg-blue-300 text-gray-900 flex gap-4 justify-center">
                 <Image src="/google.png" alt="Google Logo" width={20} height={20} />

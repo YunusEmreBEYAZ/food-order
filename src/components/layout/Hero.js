@@ -16,8 +16,8 @@ export default function Hero() {
                 Pizza is the best food which we do!
                 </p>
                 <div className='flex items-center justify-center'>
-                    <button className=' flex bg-red-500 text-white px-4 py-2 rounded-full mt-4'>Order Now&nbsp;&nbsp; <RightArrow /></button>
-                    <button className='flex px-4 py-2 rounded-full mt-4 ml-4 border'>Learn More&nbsp;&nbsp; <RightArrow /></button>
+                    <button className=' flex justify-center bg-red-500 text-white px-4 py-2 rounded-full mt-4'>Order Now&nbsp;&nbsp; <RightArrow /></button>
+                    <button className='flex justify-center px-4 py-2 rounded-full mt-4 ml-4 border'>Learn More&nbsp;&nbsp; <RightArrow /></button>
                 </div>
             </div>
             <div className='relative rounded-full mx-12'>

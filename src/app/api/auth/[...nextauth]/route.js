@@ -3,18 +3,20 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import mongoose from "mongoose";
 import {User} from "../../../models/User";
 import bcrypt from "bcrypt";
+import GoogleProvider from "next-auth/providers/google";
 
 const handler = NextAuth({
     secret: process.env.SECRET,
     providers: [
+        GoogleProvider({
+          clientId: process.env.GOOGLE_CLIENT_ID,
+          clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+ 
+        }),
+
         CredentialsProvider({
-          // The name to display on the sign in form (e.g. 'Sign in with...')
           name: 'Credentials',
           id: 'credentials',
-          // The credentials is used to generate a suitable form on the sign in page.
-          // You can specify whatever fields you are expecting to be submitted.
-          // e.g. domain, username, password, 2FA token, etc.
-          // You can pass any HTML attribute to the <input> tag through the object.
           credentials: {
             username: { label: "email", type: "email", placeholder: "test@example.com" },
             password: { label: "Password", type: "password" }

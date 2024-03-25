@@ -9,6 +9,7 @@ export default function Login() {
 
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
+    const [error,setError] = useState("");
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -19,6 +20,7 @@ export default function Login() {
         <section className=" max-w-lg rounded-lg text-center bg-gray-600 shadow-2xl shadow-black transition-all mx-auto mt-16 mb-16 px-8 py-8">
         <h1 className="text-center text-white text-4xl">Login</h1>
         <form className="block max-w-xs text-center mx-auto mt-16" onSubmit={handleFormSubmit}>
+            {error && <div className="text-red-500">{error}</div>}
             <input
                 
                 type="email"

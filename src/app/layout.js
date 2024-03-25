@@ -1,6 +1,7 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Header from "../components/layout/Header";
+import {AppWrapper} from "../components/AppWrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,11 +15,13 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={inter.className}>
         <main className="max-w-5xl mx-auto p-4">
-        <Header />
-        {children}
-        <footer className="text-center my-6 border-t text-gray-700 p-4 text-sm">
-          <p>&copy; 2024 Pizza Place</p>
-        </footer> 
+        <AppWrapper>
+          <Header />
+            {children}
+          <footer className="text-center my-6 border-t text-gray-700 p-4 text-sm">
+            <p>&copy; 2024 Pizza Place</p>
+          </footer>
+        </AppWrapper> 
         </main>
       </body>
     </html>

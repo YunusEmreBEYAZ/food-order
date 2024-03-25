@@ -30,8 +30,7 @@ const handler = NextAuth({
 
            if(user && bcrypt.compareSync(password,user.password)){
               return user;
-           }
-           else{
+           }else{
              throw new Error("Invalid user");
            }
 
